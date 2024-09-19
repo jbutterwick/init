@@ -7,7 +7,7 @@ if ! cargo --version; then
 fi
 
 cargo install zellij btm starship rtx-cli bat exa ripgrep
-
+bat cache --build
 dnf -y install dnf-plugins-core
 dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
 
