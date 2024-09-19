@@ -1,4 +1,4 @@
-dnf -y install cmake freetype-devel fontconfig-devel libxcb-devel libxkbcommon-devel g++ openssl-devel sqlite-devel python3-tkinter ncurses-devel perl
+dnf -y install cmake freetype-devel fontconfig-devel libxcb-devel libxkbcommon-devel g++ openssl-devel sqlite-devel python3-tkinter ncurses-devel perl helix
 dnf -y groupinstall "Development Tools"
 
 # rust and rust packages
