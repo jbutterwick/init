@@ -2,7 +2,10 @@ dnf -y install cmake freetype-devel fontconfig-devel libxcb-devel libxkbcommon-d
 dnf -y groupinstall "Development Tools"
 
 # rust and rust packages
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+if ! cargo --version; then
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+fi
+
 cargo install zellij btm starship rtx-cli bat exa ripgrep
 
 dnf -y install dnf-plugins-core
