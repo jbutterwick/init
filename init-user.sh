@@ -135,6 +135,25 @@ install_dotfiles() {
   cp -a "$ROOT_DIR/dotfiles/." "$HOME/.config"
 }
 
+install_llm_config() {
+  log "Installing LLM env config"
+  mkdir -p "$HOME/.config/llm"
+  install -m 0755 "$ROOT_DIR/llm/env.sh" "$HOME/.config/llm/env.sh"
+  install -m 0755 "$ROOT_DIR/llm/headroom-proxy.sh" "$HOME/.config/llm/headroom-proxy.sh"
+  install -m 0755 "$ROOT_DIR/llm/run-telegram-bot.sh" "$HOME/.config/llm/run-telegram-bot.sh"
+  install -m 0644 "$ROOT_DIR/llm/providers.env.example" "$HOME/.config/llm/providers.env.example"
+
+  # NEVER overwrite the secrets file
+  if [ ! -f "$HOME/.config/llm/providers.env" ]; then
+    install -m 0600 "$ROOT_DIR/llm/providers.env.example" "$HOME/.config/llm/providers.env"
+    log "Created ~/.config/llm/providers.env from example — FILL IN SECRETS"
+  fi
+
+  mkdir -p "$HOME/.config/systemd/user"
+  install -m 0644 "$ROOT_DIR/systemd/user/headroom-proxy.service" "$HOME/.config/systemd/user/headroom-proxy.service"
+  install -m 0644 "$ROOT_DIR/systemd/user/claude-telegram-bot.service" "$HOME/.config/systemd/user/claude-telegram-bot.service"
+}
+
 configure_bat() {
   if require_command bat; then
     bat cache --build || true
@@ -173,6 +192,7 @@ main() {
   install_starship
   install_cargo_tools
   install_dotfiles
+  install_llm_config
   install_shell_files
   configure_bat
 

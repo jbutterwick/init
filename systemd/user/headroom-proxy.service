@@ -1,0 +1,16 @@
+[Unit]
+Description=Headroom AI compression proxy (Anthropic-compatible)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/home/jordan/.config/llm/headroom-proxy.sh
+Restart=on-failure
+RestartSec=3
+Environment=PATH=/home/jordan/.local/bin:/home/jordan/bin:/usr/local/bin:/usr/bin:/bin
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=default.target

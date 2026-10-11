@@ -1,0 +1,17 @@
+[Unit]
+Description=Claude Code Telegram Bot
+After=headroom-proxy.service network-online.target
+Wants=headroom-proxy.service network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/jordan/projects/claude-code-telegram
+ExecStart=/home/jordan/.config/llm/run-telegram-bot.sh
+Restart=always
+RestartSec=10
+Environment=PATH=/home/jordan/.local/bin:/home/jordan/bin:/usr/local/bin:/usr/bin:/bin
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=default.target

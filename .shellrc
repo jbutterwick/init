@@ -1,5 +1,11 @@
 # Shared interactive shell configuration for bash and zsh.
 
+# LLM provider env → headroom proxy (see ~/.config/llm/)
+if [ -r "$HOME/.config/llm/env.sh" ]; then
+  # shellcheck disable=SC1090
+  . "$HOME/.config/llm/env.sh"
+fi
+
 case $- in
   *i*) ;;
   *) return 0 2>/dev/null || exit 0 ;;
